@@ -1,7 +1,7 @@
 [package]
 name = "ws2812-rs"
 version = "0.1.0"
-authors = ["Paul Sajna <paulsajna@gmail.com>"]
+authors = ["Paul Sajna <sajattack@gmail.com>"]
 edition = "2018"
 
 [dependencies]
