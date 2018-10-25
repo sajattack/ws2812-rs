@@ -1,7 +1,8 @@
 [package]
-name = "ws2812-rs"
+name = "ws2812"
 version = "0.1.0"
 authors = ["Paul Sajna <sajattack@gmail.com>"]
 edition = "2018"
 
 [dependencies]
+embedded-hal = "0.2"
