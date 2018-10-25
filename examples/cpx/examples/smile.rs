@@ -53,5 +53,5 @@ fn main() -> ! {
 
 #[alloc_error_handler]
 fn error(_: core::alloc::Layout) -> ! {
-   unimplemented!() 
+   panic!()
 }
