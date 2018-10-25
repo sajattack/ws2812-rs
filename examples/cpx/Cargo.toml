@@ -2,20 +2,22 @@
 name = "cpx-ws2812-examples"
 version = "0.1.0"
 authors = ["Paul Sajna <sajattack@gmail.com>"]
-edition = "2018"
+edition = "2015"
 
 [dependencies]
 embedded-hal = "0.2"
 atsamd21-hal = "0.2"
 cortex-m = "0.5"
-ws2812 = { path = "../.." }
+alloc-cortex-m = "0.3"
+circuit_playground_express = { git = "https://github.com/atsamd-rs/atsamd" }
 
 [dev-dependencies]
 panic-abort = "0.2"
 cortex-m-rt = "0.5"
 
-[dependencies.circuit_playground_express]
-git = "https://github.com/atsamd-rs/atsamd" 
+[dependencies.ws2812]
+path = "../.."
+default-features = false
 
 [features]
 # ask the HAL to enable atsamd21g18a support

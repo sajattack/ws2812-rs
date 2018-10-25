@@ -2,7 +2,11 @@
 name = "ws2812"
 version = "0.1.0"
 authors = ["Paul Sajna <sajattack@gmail.com>"]
-edition = "2018"
+edition = "2015"
 
 [dependencies]
 embedded-hal = "0.2"
+
+[features]
+pwm = []
+default = ["pwm"]
