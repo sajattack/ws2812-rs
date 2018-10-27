@@ -35,19 +35,37 @@ fn main() -> ! {
     let mut peripherals = Peripherals::take().unwrap();
     let core = CorePeripherals::take().unwrap();
      
-    let mut clocks = GenericClockController::with_internal_32kosc(
+    let clocks = GenericClockController::with_internal_32kosc(
         peripherals.GCLK,
         &mut peripherals.PM,
         &mut peripherals.SYSCTRL,
         &mut peripherals.NVMCTRL,
     );
+
+    /*
+     *cortex_m::interrupt::disable();
+     *peripherals.NVMCTRL.ctrlb.modify(|r, w| {
+     *    let read_mode_w = w.readmode();
+     *    read_mode_w.deterministic()
+     *});
+     */
      
     let mut pins = circuit_playground_express::Pins::new(peripherals.PORT);
-    let mut neopixel = pins.neopixel.into_push_pull_output(&mut pins.port);
-
-    let data: [u8;30] = [0x01, 0x01, 0x00, 0x01, 0x01, 0x00, 0x01, 0x01, 0x00, 0x00, 0x00,0x00, 0x01, 0x01, 0x00, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 0x01, 0x01, 0x00, 0x01, 0x01, 0x00, 0x01, 0x01, 0x00];
-    let mut neopixel = WS2812::new(neopixel, 10, 1.0, false);
-    neopixel.write(&data);
+    let neopixel_pin = pins.neopixel.into_push_pull_output(&mut pins.port);
+    let mut neopixel = WS2812::new(neopixel_pin, 10, 1, false);
+    neopixel.write(&[0x01, 0x01, 0x00, 0x01, 0x01, 0x00, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00,  0x01, 0x01, 0x00, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 0x01, 0x01, 0x00, 0x01, 0x01, 0x00, 0x01, 0x01, 0x00, 0x01, 0x01, 0x00]);
+    /*
+     *let yellow = [128, 128, 0];
+     *neopixel.set_led_color(1, yellow);
+     *neopixel.set_led_color(2, yellow);
+     *neopixel.set_led_color(3, yellow);
+     *neopixel.set_led_color(5, yellow);
+     *neopixel.set_led_color(6, yellow);
+     *neopixel.set_led_color(8, yellow);
+     *neopixel.set_led_color(9, yellow);
+     *neopixel.set_led_color(10, yellow);
+     *neopixel.show();
+     */
     loop {}
 }
 
